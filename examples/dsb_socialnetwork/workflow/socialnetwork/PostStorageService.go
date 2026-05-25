@@ -129,5 +129,8 @@ func (p *PostStorageServiceImpl) ReadPosts(ctx context.Context, reqID int64, pos
 			p.postStorageCache.Put(ctx, strconv.FormatInt(new_post.PostID, 10), new_post)
 		}
 	}
+	if len(retposts) != len(postIDs) {
+		return []Post{}, errors.New("Return set incomplete")
+	}
 	return retposts, nil
 }

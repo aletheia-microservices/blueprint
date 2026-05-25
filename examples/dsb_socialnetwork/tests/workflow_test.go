@@ -3,6 +3,7 @@ package tests
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/blueprint-uservices/blueprint/examples/dsb_socialnetwork/workflow/socialnetwork"
 	"github.com/stretchr/testify/assert"
@@ -48,6 +49,9 @@ func TestWorkflow(t *testing.T) {
 	// Follow again
 	err = socialGraph.Follow(ctx, 0, 5001, 5002)
 	assert.NoError(t, err)
+
+	// Sleep to avoid id collisions in unique id service
+	time.Sleep(25 * time.Millisecond)
 
 	// Compose a post (text only)
 	postID1, mentionIDs, err := composePost.ComposePost(ctx, 0, "alicedoe_rm", 5001, "Hello from the social network", []int64{}, []string{}, socialnetwork.POST)

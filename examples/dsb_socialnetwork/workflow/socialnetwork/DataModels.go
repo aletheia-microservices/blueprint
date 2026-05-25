@@ -40,9 +40,9 @@ type PostType int64
 // Enums aren't supported atm. So just use integers instead.
 const (
 	POST int64 = iota
-	REPOST
-	REPLY
-	DM
+//	REPOST
+//	REPLY
+//	DM
 )
 
 type Post struct {

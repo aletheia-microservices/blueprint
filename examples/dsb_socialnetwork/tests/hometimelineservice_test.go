@@ -85,6 +85,11 @@ func TestHomeTimelineServiceWriteAndRead(t *testing.T) {
 	err = socialGraph.Follow(ctx, 0, 71, 70)
 	assert.NoError(t, err)
 
+	postStorage, err := postStorageServiceRegistry.Get(ctx)
+	assert.NoError(t, err)
+	err = postStorage.StorePost(ctx, 0, makePost(6001, 70, "user70", "hello"))
+	assert.NoError(t, err)
+
 	service, err := homeTimelineServiceRegistry.Get(ctx)
 	assert.NoError(t, err)
 
@@ -109,6 +114,11 @@ func TestHomeTimelineServiceWriteWithMentionedUsers(t *testing.T) {
 	assert.NoError(t, err)
 	// user 81 follows user 80 (follower)
 	err = socialGraph.Follow(ctx, 0, 81, 80)
+	assert.NoError(t, err)
+
+	postStorage, err := postStorageServiceRegistry.Get(ctx)
+	assert.NoError(t, err)
+	err = postStorage.StorePost(ctx, 0, makePost(7001, 80, "user80", "hi @82"))
 	assert.NoError(t, err)
 
 	service, err := homeTimelineServiceRegistry.Get(ctx)
