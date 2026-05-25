@@ -2,6 +2,9 @@
 
 This is a Blueprint re-implementation of the [digota application](https://github.com/digota/digota).
 
+Version used:
+https://github.com/digota/digota/tree/c2a16d5
+
 ## Getting started
 
 Prerequisites for this tutorial:

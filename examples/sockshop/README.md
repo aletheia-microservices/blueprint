@@ -1,5 +1,10 @@
 # SockShop
 
+This is a Blueprint re-implementation of the [SockShop application](https://github.com/ocp-power-demos/sock-shop-demo).
+
+Version used:
+https://github.com/ocp-power-demos/sock-shop-demo/tree/807a7ba
+
 ## Getting started
 
 Prerequisites for this tutorial:

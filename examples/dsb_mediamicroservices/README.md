@@ -2,6 +2,9 @@
 
 This is a Blueprint re-implementation of the [media-microservices application](https://github.com/delimitrou/DeathStarBench/tree/master/mediaMicroservices).
 
+Version used:
+https://github.com/delimitrou/DeathStarBench/tree/6ecb097
+
 * [workflow](workflow) contains service implementations
 * [tests](tests) has tests of the workflow
 * [wiring](wiring) configures the application's topology and deployment and is used to compile the application

@@ -2,6 +2,9 @@
 
 This is a Blueprint re-implementation / translation of the [Train Ticket application](https://github.com/FudanSELab/train-ticket/tree/master).
 
+Version used:
+https://github.com/FudanSELab/train-ticket/tree/313886e
+
 The application provides a mostly-direct translation of the original code. In terms of the APIs and functionality, this implementation is intended to be as close to unmodified from the original as possible.
 
 * [workflow](workflow) contains service implementations

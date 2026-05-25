@@ -2,6 +2,9 @@
 
 This is a Blueprint re-implementation of the [eShopMicroservices application](https://github.com/mehmetozkaya/EShopMicroservices).
 
+Version used:
+https://github.com/mehmetozkaya/EShopMicroservices/tree/b4c2a9c
+
 ## Getting started
 
 Prerequisites for this tutorial:

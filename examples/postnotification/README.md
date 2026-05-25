@@ -2,6 +2,9 @@
 
 This is a Blueprint re-implementation of the [PostNotification application](https://github.com/Antipode-SOSP23/antipode-post-notification).
 
+Version used:
+https://github.com/Antipode-SOSP23/antipode-post-notification/tree/892a8c1
+
 ## Getting started
 
 Prerequisites for this tutorial:

@@ -2,6 +2,9 @@
 
 This is a Blueprint re-implementation / translation of the [social-network application](https://github.com/delimitrou/DeathStarBench/tree/master/socialNetwork) from the DeathStarBench microservices benchmark.
 
+Version used:
+https://github.com/delimitrou/DeathStarBench/tree/6ecb097
+
 The application provides a mostly-direct translation of the original code. In terms of the APIs and functionality, this implementation is intended to be as close to unmodified from the original as possible.
 
 * [workflow](workflow) contains service implementations
