@@ -29,6 +29,10 @@ use (
 	./examples/trainticket/tests
 	./examples/trainticket/wiring
 	./examples/trainticket/workflow
+	./examples/simpleshop/wiring
+	./examples/simpleshop/workflow
+	./examples/simpleshopcascade/wiring
+	./examples/simpleshopcascade/workflow
 	./plugins
 	./runtime
 	./test/wiring

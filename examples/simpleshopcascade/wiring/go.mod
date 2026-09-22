@@ -4,6 +4,8 @@ go 1.22.4
 
 require github.com/blueprint-uservices/blueprint/examples/simpleshopcascade/workflow v0.0.0
 
+require github.com/google/uuid v1.6.0 // indirect
+
 require (
 	github.com/blueprint-uservices/blueprint/blueprint v0.0.0-20250729202253-a8f505263256
 	github.com/blueprint-uservices/blueprint/plugins v0.0.0-20250729202253-a8f505263256
@@ -11,7 +13,7 @@ require (
 )
 
 require (
-	github.com/go-logr/logr v1.4.1 // indirect
+	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
@@ -23,18 +25,18 @@ require (
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240424034433-3c2c7870ae76 // indirect
 	go.mongodb.org/mongo-driver v1.15.0 // indirect
-	go.opentelemetry.io/otel v1.32.0 // indirect.
-	go.opentelemetry.io/otel/exporters/stdout/stdoutmetric v1.32.0 // indirect.
-	go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.32.0 // indirect.
-	go.opentelemetry.io/otel/metric v1.32.0 // indirect.
-	go.opentelemetry.io/otel/sdk v1.32.0 // indirect.
-	go.opentelemetry.io/otel/sdk/metric v1.32.0 // indirect.
-	go.opentelemetry.io/otel/trace v1.32.0 // indirect.
+	go.opentelemetry.io/otel v1.32.0 // indirect; indirect.
+	go.opentelemetry.io/otel/exporters/stdout/stdoutmetric v1.32.0 // indirect; indirect.
+	go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.32.0 // indirect; indirect.
+	go.opentelemetry.io/otel/metric v1.32.0 // indirect; indirect.
+	go.opentelemetry.io/otel/sdk v1.32.0 // indirect; indirect.
+	go.opentelemetry.io/otel/sdk/metric v1.32.0 // indirect; indirect.
+	go.opentelemetry.io/otel/trace v1.32.0 // indirect; indirect.
 	golang.org/x/crypto v0.22.0 // indirect
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.20.0 // indirect
 )
