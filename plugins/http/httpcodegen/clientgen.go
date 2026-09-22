@@ -25,7 +25,7 @@ func GenerateClient(builder golang.ModuleBuilder, service *gocode.ServiceInterfa
 	}
 
 	client.Imports.AddPackages(
-		"net/http", "encoding/json", "context", "time", "net/url", "fmt", "io",
+		"net/http", "encoding/json", "context", "time", "net/url", "fmt", "io", "strings",
 	)
 
 	slog.Info(fmt.Sprintf("Generating %v/%v.go", client.Package.PackageName, client.Name))
@@ -100,7 +100,8 @@ func (client *{{$receiver}}) {{SignatureWithRetVars $f}} {
 	defer resp.Body.Close()
 	statusOk := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOk {
-		err = fmt.Errorf("StatusCode was %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		err = fmt.Errorf("StatusCode was %d: %s", resp.StatusCode, strings.TrimSpace(string(body)))
 		return
 	}
 	response := struct {
