@@ -1,6 +1,6 @@
 module github.com/blueprint-uservices/blueprint/examples/postnotification/workflow
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/blueprint-uservices/blueprint/runtime v0.0.0-20240405152959-f078915d2306

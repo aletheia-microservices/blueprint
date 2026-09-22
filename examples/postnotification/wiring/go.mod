@@ -1,6 +1,6 @@
 module github.com/blueprint-uservices/blueprint/examples/postnotification/wiring
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/golang/snappy v0.0.4 // indirect

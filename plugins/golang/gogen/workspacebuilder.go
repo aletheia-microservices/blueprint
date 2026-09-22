@@ -167,7 +167,7 @@ func (workspace *WorkspaceBuilderImpl) readModfile(moduleSubDir string) (*modfil
 	return f, nil
 }
 
-var goWorkTemplate = `go 1.25.0
+var goWorkTemplate = `go 1.26.0
 
 use (
 	{{ range $dirName, $moduleName := .Modules }}./{{ $dirName }}

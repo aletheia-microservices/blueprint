@@ -1,6 +1,6 @@
 module github.com/blueprint-uservices/blueprint/runtime
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/DistributedClocks/GoVector v0.0.0-20240117185643-ae07272d0ebd

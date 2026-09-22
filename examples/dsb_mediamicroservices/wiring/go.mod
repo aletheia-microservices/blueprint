@@ -1,6 +1,6 @@
 module github.com/blueprint-uservices/blueprint/examples/dsb_mediamicroservices/wiring
 
-go 1.25.0
+go 1.26.0
 
 require github.com/blueprint-uservices/blueprint/examples/dsb_mediamicroservices/workflow v0.0.0
 

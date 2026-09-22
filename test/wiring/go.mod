@@ -1,6 +1,6 @@
 module github.com/blueprint-uservices/blueprint/test/wiring
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/blueprint-uservices/blueprint/test/workflow v0.0.0

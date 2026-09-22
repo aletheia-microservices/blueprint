@@ -1,21 +1,21 @@
-go 1.25.0
+go 1.26.0
 
 use (
 	./blueprint
 	./examples/digota/tests
 	./examples/digota/wiring
 	./examples/digota/workflow
+	./examples/dotnet_eshop/tests
+	./examples/dotnet_eshop/wiring
+	./examples/dotnet_eshop/workflow
 	./examples/dsb_hotel/wiring
 	./examples/dsb_hotel/workflow
 	./examples/dsb_mediamicroservices/tests
 	./examples/dsb_mediamicroservices/wiring
 	./examples/dsb_mediamicroservices/workflow
+	./examples/dsb_socialnetwork/tests
 	./examples/dsb_socialnetwork/wiring
 	./examples/dsb_socialnetwork/workflow
-	./examples/dsb_socialnetwork/tests
-	./examples/dotnet_eshop/tests
-	./examples/dotnet_eshop/wiring
-	./examples/dotnet_eshop/workflow
 	./examples/eshopmicroservices/tests
 	./examples/eshopmicroservices/wiring
 	./examples/eshopmicroservices/workflow
@@ -23,12 +23,12 @@ use (
 	./examples/postnotification/tests
 	./examples/postnotification/wiring
 	./examples/postnotification/workflow
+	./examples/sockshop/tests
 	./examples/sockshop/wiring
 	./examples/sockshop/workflow
-	./examples/sockshop/tests
+	./examples/trainticket/tests
 	./examples/trainticket/wiring
 	./examples/trainticket/workflow
-	./examples/trainticket/tests
 	./plugins
 	./runtime
 	./test/wiring
