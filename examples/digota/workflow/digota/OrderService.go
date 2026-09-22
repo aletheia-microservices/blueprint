@@ -141,10 +141,12 @@ func (s *OrderServiceImpl) Pay(ctx context.Context, id string, card *Card, payme
 	// Check for errors and oversell
 	for _, item := range lockedItems {
 		if item.Err != nil {
-			return nil, item.Err
+			// additional logic to confirm inconsistencies between order items and inventory items
+			// referential integrity: absence of cascading deletes
+			return nil, fmt.Errorf("[WARNING] dangling reference found: order (%s) references sku (%s) which could not be retrieved: %v", order.Id, item.OrderItem.Parent, item.Err)
 		}
 		// check for oversell
-		if item.Sku.Inventory.Type == int32(Inventory_Finite) && item.Sku.Inventory.Quantity < item.OrderItem.Quantity {
+		if item.Sku.Inventory != nil && item.Sku.Inventory.Type == int32(Inventory_Finite) && item.Sku.Inventory.Quantity < item.OrderItem.Quantity {
 			return nil, fmt.Errorf("Oversell %s", item.Sku.Id)
 		}
 	}
@@ -165,7 +167,7 @@ func (s *OrderServiceImpl) Pay(ctx context.Context, id string, card *Card, payme
 	}
 	// update all inventories
 	for _, item := range lockedItems {
-		if item.Sku.Inventory.Type == int32(Inventory_Finite) {
+		if item.Sku.Inventory != nil && item.Sku.Inventory.Type == int32(Inventory_Finite) {
 			// update inventory Quantity
 			item.Sku.Inventory.Quantity -= item.OrderItem.Quantity
 			item.Update()
@@ -202,6 +204,13 @@ func (s *OrderServiceImpl) Return(ctx context.Context, id string) (*Order, error
 			item.Unlock()
 		}
 	}()
+	for _, item := range lockedItems {
+		if item.Err != nil {
+			// additional logic to confirm inconsistencies between order items and inventory items
+			// referential integrity: absence of cascading deletes
+			return nil, fmt.Errorf("[WARNING] dangling reference found: order (%s) references sku (%s) which could not be retrieved: %v", order.Id, item.OrderItem.Parent, item.Err)
+		}
+	}
 	// refund the order
 	if _, err := s.paymentService.RefundCharge(ctx, order.GetChargeId(), uint64(amount), 0); err != nil {
 		return nil, err
@@ -211,7 +220,7 @@ func (s *OrderServiceImpl) Return(ctx context.Context, id string) (*Order, error
 	case int32(Order_Paid):
 		order.Status = int32(Order_Canceled)
 		for _, item := range lockedItems {
-			if item.Sku.Inventory.Type == int32(Inventory_Finite) {
+			if item.Sku.Inventory != nil && item.Sku.Inventory.Type == int32(Inventory_Finite) {
 				item.Sku.Inventory.Quantity += item.OrderItem.Quantity
 				item.Update()
 			}
@@ -362,12 +371,13 @@ type lockedOrderItem struct {
 func (s *OrderServiceImpl) getLockedOrderItems(ctx context.Context, order *Order) (items []*lockedOrderItem) {
 	for _, orderItem := range order.GetItems() {
 		if orderItem.IsTypeSku() {
-			item, _ := s.skuService.Get(ctx, orderItem.Parent)
+			item, err := s.skuService.Get(ctx, orderItem.Parent)
 			items = append(items, &lockedOrderItem{
 				OrderItem: orderItem,
 				Sku:       item,
 				Unlock:    func() error { return nil },
 				Update:    func() error { return nil },
+				Err:       err,
 			})
 		}
 	}

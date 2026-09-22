@@ -134,7 +134,9 @@ func (s *SkuServiceImpl) Update(ctx context.Context, id string, name string, cur
 
 	product, err := s.productService.Get(ctx, sku.Parent)
 	if err != nil {
-		return nil, fmt.Errorf("error calling product service: %v", err)
+		// additional logic to confirm inconsistencies between sku items and product items
+		// referential integrity: absence of cascading deletes
+		return nil, fmt.Errorf("[WARNING] dangling reference found: sku (%s) references product (%s) which could not be retrieved: %v", id, sku.Parent, err)
 	}
 
 	var attrs = make(map[string]string)
