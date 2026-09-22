@@ -17,7 +17,7 @@ import (
 	"github.com/blueprint-uservices/blueprint/plugins/mongodb"
 	"github.com/blueprint-uservices/blueprint/plugins/mysql"
 	"github.com/blueprint-uservices/blueprint/plugins/rabbitmq"
-	"github.com/blueprint-uservices/blueprint/plugins/thrift"
+	"github.com/blueprint-uservices/blueprint/plugins/grpc"
 	"github.com/blueprint-uservices/blueprint/plugins/workflow"
 )
 
@@ -38,7 +38,7 @@ func applyDockerQueueHandlerDefaults(spec wiring.WiringSpec, serviceName, procNa
 }
 
 func applyDockerDefaults(spec wiring.WiringSpec, serviceName, procName, ctrName string) string {
-	thrift.Deploy(spec, serviceName)
+	grpc.Deploy(spec, serviceName)
 	goproc.CreateProcess(spec, procName, serviceName)
 	return linuxcontainer.CreateContainer(spec, ctrName, procName)
 }

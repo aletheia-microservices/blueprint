@@ -12,8 +12,8 @@ import (
 type dbUser struct {
 	User       `bson:",inline"`
 	ID         primitive.ObjectID   `bson:"_id"`
-	AddressIDs []primitive.ObjectID `bson:"addresses"`
-	CardIDs    []primitive.ObjectID `bson:"cards"`
+	AddressIDs []primitive.ObjectID `bson:"Addresses"`
+	CardIDs    []primitive.ObjectID `bson:"Cards"`
 }
 
 // Sets the user's ID to be the hex string of the database ObjectID.
@@ -101,7 +101,7 @@ func (s *UserServiceImpl) userdb_GetUser(ctx context.Context, userid string) (Us
 	}
 
 	// Execute query
-	cursor, err := collection.FindOne(ctx, bson.D{{Key: "UserID", Value: id}})
+	cursor, err := collection.FindOne(ctx, bson.D{{Key: "_id", Value: id}})
 	if err != nil {
 		return newUser(), err
 	}
@@ -192,7 +192,7 @@ func (s *UserServiceImpl) userdb_CreateCard(ctx context.Context, userid string, 
 
 	// Update the user
 	filter := bson.D{{Key: "_id", Value: id}}
-	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "cards", Value: cardID}}}}
+	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "Cards", Value: cardID}}}}
 	_, err = collection.UpdateOne(ctx, filter, update)
 	return err
 }
@@ -224,7 +224,7 @@ func (s *UserServiceImpl) userdb_CreateAddress(ctx context.Context, userid strin
 
 	// Update the user
 	filter := bson.D{{Key: "_id", Value: id}}
-	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "addresses", Value: addressID}}}}
+	update := bson.D{{Key: "$addToSet", Value: bson.D{{Key: "Addresses", Value: addressID}}}}
 	_, err = collection.UpdateOne(ctx, filter, update)
 	return err
 }
@@ -284,7 +284,7 @@ func (s *UserServiceImpl) userdb_DeleteUser(ctx context.Context, userid string) 
 
 func (s *UserServiceImpl) userdb_DeleteAddress(ctx context.Context, addressid string) error {
 	// Remove from customers db from any customers that have this address
-	if err := s.userdb_DeleteAttr(ctx, "addresses", addressid); err != nil {
+	if err := s.userdb_DeleteAttr(ctx, "Addresses", addressid); err != nil {
 		return err
 	}
 
@@ -294,7 +294,7 @@ func (s *UserServiceImpl) userdb_DeleteAddress(ctx context.Context, addressid st
 
 func (s *UserServiceImpl) userdb_DeleteCard(ctx context.Context, cardid string) error {
 	// Remove from customers db from any customers that have this card
-	if err := s.userdb_DeleteAttr(ctx, "cards", cardid); err != nil {
+	if err := s.userdb_DeleteAttr(ctx, "Cards", cardid); err != nil {
 		return err
 	}
 

@@ -10,15 +10,15 @@ import (
 )
 
 type User struct {
-	FirstName string    `json:"firstName" bson:"firstName"`
-	LastName  string    `json:"lastName" bson:"lastName"`
-	Email     string    `json:"email" bson:"email"`
-	Username  string    `json:"username" bson:"username"`
-	Password  string    `json:"password" bson:"password,omitempty"`
-	Addresses []Address `json:"addresses,omitempty" bson:"-"`
-	Cards     []Card    `json:"cards,omitempty" bson:"-"`
-	UserID    string    `json:"id" bson:"-"`
-	Salt      string    `json:"salt" bson:"salt"`
+	FirstName string    `bson:"FirstName"`
+	LastName  string    `bson:"LastName"`
+	Email     string    `bson:"Email"`
+	Username  string    `bson:"Username"`
+	Password  string    `bson:"Password,omitempty"`
+	Addresses []Address `bson:"Addresses"`
+	Cards     []Card    `bson:"Cards"`
+	UserID    string    `bson:"UserID"`
+	Salt      string    `bson:"Salt"`
 }
 type Address struct {
 	Street   string `bson:"Street"`
@@ -26,13 +26,13 @@ type Address struct {
 	Country  string `bson:"Country"`
 	City     string `bson:"City"`
 	PostCode string `bson:"PostCode"`
-	ID       string `bson:"-"`
+	ID       string `bson:"ID"`
 }
 type Card struct {
 	LongNum string `bson:"LongNum"`
 	Expires string `bson:"Expires"`
 	CCV     string `bson:"CCV"`
-	ID      string `bson:"-"`
+	ID      string `bson:"ID"`
 }
 
 func newUser() User {

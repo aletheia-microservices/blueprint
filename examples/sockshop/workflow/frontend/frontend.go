@@ -44,7 +44,8 @@ type Frontend interface {
 
 	// extra endpoints
 	// catalogue
-	//LoadCatalogue(ctx context.Context) (string, error)
+	LoadCatalogueTags(ctx context.Context) (string, error)
+	LoadCatalogueSocks(ctx context.Context) (string, error)
 }
 
 type FrontendImpl struct {
@@ -217,10 +218,17 @@ func (f *FrontendImpl) UpdateItem(ctx context.Context, sessionID string, itemID 
 	return sessionID, f.cart.UpdateItem(ctx, sessionID, carts.Item{ID: item.SockID, Quantity: quantity, UnitPrice: item.Price})
 }
 
-func (f *FrontendImpl) LoadCatalogue(ctx context.Context) (string, error) {
-	err_msg := "Failed to load catalogue"
+func (f *FrontendImpl) LoadCatalogueTags(ctx context.Context) (string, error) {
 	var alltags = []string{"brown", "geek", "formal", "blue", "skin", "red", "action", "sport", "black", "magic", "green"}
 
+	if err := f.catalogue.AddTags(ctx, alltags); err != nil {
+		return "Failed to load catalogue tags", err
+	}
+
+	return "Load catalogue tags successful", nil
+}
+
+func (f *FrontendImpl) LoadCatalogueSocks(ctx context.Context) (string, error) {
 	sock := func(name, description string, price float32, qty int, url1, url2 string, tags ...string) catalogue.Sock {
 		return catalogue.Sock{Name: name, Description: description,
 			Price: price, Quantity: qty, ImageURL1: url1, ImageURL2: url2, Tags: tags}
@@ -239,17 +247,11 @@ func (f *FrontendImpl) LoadCatalogue(ctx context.Context) (string, error) {
 		sock("Cat socks", "consequat amet cupidatat minim laborum tempor elit ex consequat in", 15, 175, "/catalogue/images/catsocks.jpg", "/catalogue/images/catsocks2.jpg", "brown", "formal", "green"),
 	}
 
-	err := f.catalogue.AddTags(ctx, alltags)
-	if err != nil {
-		return err_msg, err
-	}
-
 	for _, s := range socks {
-		_, err := f.catalogue.AddSock(ctx, s)
-		if err != nil {
-			return err_msg, err
+		if _, err := f.catalogue.AddSock(ctx, s); err != nil {
+			return "Failed to load catalogue socks", err
 		}
 	}
 
-	return "Load catalogue successful", nil
+	return "Load catalogue socks successful", nil
 }
