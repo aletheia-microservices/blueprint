@@ -108,7 +108,7 @@ curl "http://localhost:12345/Login?reqID=0&username=johndoe&password=secret123"
 
 A review is composed by uploading all its parts (each with the same `reqID`). When all 5 components arrive, the review is automatically persisted. Use a fresh `reqID` that has not been used by any prior upload call.
 
-`UploadMovieId` counts as **2 components** internally (movie ID + rating), so exactly 4 curl calls are needed.
+`UploadMovieId` counts as **2 components** internally (movie ID + rating), so exactly 4 curl calls are needed. The movie's `title` must already be registered via `RegisterMovieId` (see above), or `UploadMovieId` will fail.
 
 ```zsh
 # generate a unique review ID (count=1)
@@ -123,6 +123,9 @@ curl "http://localhost:12345/UploadUserWithUsername?reqID=2&username=johndoe"
 # upload the review text (count=5 => review is stored)
 curl "http://localhost:12345/UploadText?reqID=2&text=An+absolute+masterpiece+of+cinema"
 ```
+
+> [!WARNING]
+> Do not reuse or retry a `reqID`. The 5 components are stored as persistent Redis counters with no cleanup or TTL, so even failed calls leave state behind. If any call fails, restart the Docker Compose stack (or flush Redis) and retry the full sequence with a new `reqID`. Reusing it may corrupt the review or prevent it from ever completing.
 
 ### Read a Page
 
