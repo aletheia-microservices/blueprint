@@ -61,7 +61,8 @@ func (s *ProductServiceImpl) DeleteProduct(ctx context.Context, id string) error
 		return err
 	}
 
-	return s.inventoryService.DeleteInventory(ctx, id)
+	//return s.inventoryService.DeleteInventory(ctx, id)
+	return nil
 }
 
 func (s *ProductServiceImpl) GetProduct(ctx context.Context, id string) (Product, error) {
