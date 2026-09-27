@@ -89,7 +89,7 @@ func (p *PaymentServiceImpl) AddMoney(ctx context.Context, payment Payment) erro
 	m.Money = payment.Price
 	m.ID = uuid.New().String()
 
-	coll, err := p.moneyDB.GetCollection(ctx, "payment_db", "money")
+	coll, err := p.moneyDB.GetCollection(ctx, "money_db", "money")
 	if err != nil {
 		return err
 	}
@@ -97,7 +97,7 @@ func (p *PaymentServiceImpl) AddMoney(ctx context.Context, payment Payment) erro
 }
 
 func (p *PaymentServiceImpl) Cleanup(ctx context.Context) error {
-	pay_coll, err := p.moneyDB.GetCollection(ctx, "payment_db", "payment")
+	pay_coll, err := p.paymentDB.GetCollection(ctx, "payment_db", "payment")
 	if err != nil {
 		return err
 	}
@@ -105,7 +105,7 @@ func (p *PaymentServiceImpl) Cleanup(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	money_coll, err := p.moneyDB.GetCollection(ctx, "payment_db", "money")
+	money_coll, err := p.moneyDB.GetCollection(ctx, "money_db", "money")
 	if err != nil {
 		return err
 	}

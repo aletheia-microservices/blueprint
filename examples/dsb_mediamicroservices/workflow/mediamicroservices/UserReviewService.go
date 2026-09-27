@@ -36,7 +36,7 @@ func NewUserReviewServiceImpl(ctx context.Context, database backend.NoSQLDatabas
 }
 
 func (s *UserReviewServiceImpl) UploadUserReview(ctx context.Context, reqID int64, userID int64, reviewID int64, timestamp int64) error {
-	collection, err := s.database.GetCollection(ctx, "movie_review_db", "movie_review")
+	collection, err := s.database.GetCollection(ctx, "user_review_db", "user_review")
 	if err != nil {
 		return err
 	}

@@ -44,8 +44,8 @@ type Frontend interface {
 
 	// extra endpoints
 	// catalogue
-	LoadCatalogueTags(ctx context.Context) (string, error)
-	LoadCatalogueSocks(ctx context.Context) (string, error)
+	// LoadCatalogueTags(ctx context.Context) (string, error)
+	// LoadCatalogueSocks(ctx context.Context) (string, error)
 }
 
 type FrontendImpl struct {
